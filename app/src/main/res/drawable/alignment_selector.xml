@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:drawable = "@color/black"
+    android:color="#393939"
+    android:state_checked="false"/>
+
+    <item android:drawable="@color/black"
+        android:color="@android:color/holo_orange_light"
+    android:state_checked="true"/>
+
+</selector>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Get a Ride</string>
+    <string name="nav_drawer_open">Open Navigation Drawer</string>
+    <string name="nav_drawer_close">Close Navigation Drawer</string>
+    <string-array name="inquiry_array">
+        <item>Overcharging or inappropriate charging</item>
+        <item>Taking an incorrect route</item>
+        <item>Unroadworthy or unsafe vehicle</item>
+        <item>Rude driver</item>
+        <item>Late taxi / taxi doesn’t arrive at all</item>
+        <item>Dirty taxi</item>
+        <item>Driver refuses to assist with luggage</item>
+        <item>Running a red light</item>
+        <item>Speeding</item>
+        <item>Other (please Specify)</item>
+    </string-array>
+</resources>

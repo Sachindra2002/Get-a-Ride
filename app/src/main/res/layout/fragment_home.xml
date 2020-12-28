@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.771">
+
+        <RadioGroup
+            android:id="@+id/vehicleradiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.154">
+
+            <RadioButton
+                android:id="@+id/sedan"
+                android:layout_width="139dp"
+                android:layout_height="76dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:adjustViewBounds="true"
+                android:button="@drawable/sedan"
+                android:buttonTint="@drawable/alignment_selector"
+                android:checked="true"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintVertical_bias="0.112" />
+
+            <RadioButton
+                android:id="@+id/miniCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:button="@drawable/citycar"
+                android:buttonTint="@drawable/alignment_selector"
+                app:layout_constraintVertical_bias="0.261" />
+
+            <RadioButton
+                android:id="@+id/miniVan"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:button="@drawable/van"
+                android:buttonTint="@drawable/alignment_selector"
+                app:layout_constraintVertical_bias="0.27" />
+
+            <RadioButton
+                android:id="@+id/van"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:button="@drawable/minivan"
+                android:buttonTint="@drawable/alignment_selector"
+                app:layout_constraintVertical_bias="0.316" />
+
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="342dp"
+        android:layout_height="50dp"
+        android:text="Get a Ride!"
+        android:background="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901" />
+
+    <TextView
+        android:id="@+id/good"
+        android:layout_width="127dp"
+        android:layout_height="46dp"
+        android:text="Good"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/white"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="196dp"
+        android:layout_height="48dp"
+        android:text="Sachindra"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159" />
+
+    <AutoCompleteTextView
+        android:id="@+id/dropdown"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint=" Where to?"
+        android:background="@drawable/edit_text_border"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/holo_orange_light"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <AutoCompleteTextView
+        android:id="@+id/pickup"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:completionThreshold="1"
+        android:padding="10dp"
+        android:ems="10"
+        android:background="@drawable/edit_text_border"
+        android:hint=" Enter pick-up location"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/holo_orange_light"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
+
+    <TextView
+        android:id="@+id/userGreeting"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
