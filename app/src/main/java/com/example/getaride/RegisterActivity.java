@@ -9,15 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText fullname, email, phoneno, password, password2;
     private ProgressBar progressbar;
     private Button buttonregister;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mAuth = FirebaseAuth.getInstance();
         fullname = findViewById(R.id.name);
         email = findViewById(R.id.email);
         phoneno = findViewById(R.id.phone);

@@ -14,4 +14,5 @@
         <item>Speeding</item>
         <item>Other (please Specify)</item>
     </string-array>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88</string>
 </resources>

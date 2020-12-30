@@ -121,12 +121,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.159" />
 
-    <AutoCompleteTextView
+    <!--<AutoCompleteTextView
         android:id="@+id/dropdown"
         android:layout_width="362dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:hint=" Where to?"
+        android:hint="  Where to?"
         android:background="@drawable/edit_text_border"
         android:inputType="textPersonName"
         android:textColor="@android:color/holo_orange_light"
@@ -147,7 +147,7 @@
         android:padding="10dp"
         android:ems="10"
         android:background="@drawable/edit_text_border"
-        android:hint=" Enter pick-up location"
+        android:hint="   Enter pick-up location"
         android:inputType="textPersonName"
         android:textColor="@android:color/holo_orange_light"
         android:textColorHint="@color/white"
@@ -156,7 +156,22 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintVertical_bias="0.343" />-->
+
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="64dp"
+        android:layout_weight="2"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalscrollview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:context=".MapsActivity" />
 
     <TextView
         android:id="@+id/userGreeting"

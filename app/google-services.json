@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802172174149",
+    "project_id": "get-a-ride-afb65",
+    "storage_bucket": "get-a-ride-afb65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802172174149:android:35ed67ed18d355ce05482c",
+        "android_client_info": {
+          "package_name": "com.example.getaride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802172174149-kll15vtbtqn4mggq9ld6jtskq5lh90u8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4bGKHBwt0i4tyiYBW7DemoZKcrQhYI-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802172174149-kll15vtbtqn4mggq9ld6jtskq5lh90u8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
