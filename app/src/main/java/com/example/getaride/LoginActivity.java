@@ -144,6 +144,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "Please log in", Toast.LENGTH_SHORT).show();
+        } else {
+            check();
+        }
 
     }
 }
