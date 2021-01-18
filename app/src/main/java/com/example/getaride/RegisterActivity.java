@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         phoneno = findViewById(R.id.phone);
         password = findViewById(R.id.password);
         progressbar = findViewById(R.id.progressBar);
-        buttonregister = findViewById(R.id.signupbuttondriver);
+        buttonregister = findViewById(R.id.signupbutton);
         buttonregister.setOnClickListener(this);
         address = findViewById(R.id.address);
 

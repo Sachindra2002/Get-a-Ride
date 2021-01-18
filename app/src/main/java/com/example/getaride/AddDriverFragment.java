@@ -187,7 +187,7 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Users user = new Users(name, Email, number, bday, Address, VehicleNumber, VehicalType, role, status, currentLocation);
+                    Users user = new Users(name, Email, number, bday, Address, VehicleNumber, vehicleType, role, status, currentLocation);
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
                             getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

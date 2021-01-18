@@ -32,6 +32,7 @@ public class ManageDriversFragment extends Fragment {
         FirebaseRecyclerOptions<Users> list = new FirebaseRecyclerOptions.Builder<Users>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("role").equalTo("driver"), Users.class)
                 .build();
+        
 
         adapterClass = new ManageDriverAdapterClass(list);
         driverList.setAdapter(adapterClass);

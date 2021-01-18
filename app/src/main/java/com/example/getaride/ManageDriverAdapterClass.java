@@ -3,6 +3,7 @@ package com.example.getaride;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,12 +31,13 @@ public class ManageDriverAdapterClass extends FirebaseRecyclerAdapter<Users, Man
         holder.email.setText(model.getEmail());
         holder.address.setText(model.getAddress());
         holder.dob.setText(model.getDob());
-
+        String keyId = this.getRef(position).getKey();
         holder.fullname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new UpdateDriverFragment(model.getFullName(),model.getEmail(),model.getAddress(),model.getDob(),model.getPhone(), model.getVehicleType(), model.getVehicleNumber())).addToBackStack(null).commit();
+                activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new UpdateDriverFragment(model.getFullName(),model.getEmail(),model.getAddress(),model.getDob(),model.getPhone(), model.getVehicleType(), model.getVehicleNumber(), keyId)).addToBackStack(null).commit();
             }
         });
 
