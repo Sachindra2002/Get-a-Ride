@@ -3,17 +3,19 @@ package com.example.getaride;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -27,7 +29,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
@@ -36,19 +37,8 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private final static int MY_PERMISSIONS_REQUEST = 32;
@@ -57,8 +47,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     FusedLocationProviderClient client;
     TextView usergreeting;
     ArrayList<LatLng> listPoints;
+    String pickup;
+    String dropOff;
+    EditText Pickup, Dropoff;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,6 +70,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         } else {
             usergreeting.setText("Null");
         }*/
+
         listPoints = new ArrayList<>();
         String apikey = "AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88";
         Places.initialize(getContext(), apikey);
@@ -89,6 +83,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 new LatLng(-33.858754, 151.229596)
         ));
         autocompleteSupportFragment.setCountries("LK");
+        autocompleteSupportFragment.setHint("Enter pick-up location");
+        //Pickup = v.findViewById(R.id.pickup);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -112,6 +108,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 new LatLng(-33.858754, 151.229596)
         ));
         autocompleteSupportFragment2.setCountries("LK");
+        autocompleteSupportFragment2.getView().setBackgroundColor(Color.WHITE);
+        autocompleteSupportFragment2.setHint("Where To?");
         autocompleteSupportFragment2.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -194,83 +192,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         }
         map.setMyLocationEnabled(true);
 
-        map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                if(listPoints.size() == 2)
-                {
-                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
-                    TaskRequestDirection taskRequestDirection = new TaskRequestDirection();
-                    taskRequestDirection.execute(url);
-                }
-            }
-        });
-
-/*        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                if(listPoints.size() == 2)
-                {
-                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
-                    TaskRequestDirection taskRequestDirection = new TaskRequestDirection();
-                    taskRequestDirection.execute(url);
-                }
-            }
-        });*/
-
-    }
-    private String requestDirection(String reqUrl) throws IOException {
-        String responseString = "";
-        InputStream inputStream = null;
-        HttpURLConnection httpURLConnection = null;
-        try {
-            URL url = new URL(reqUrl);
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.connect();
-            inputStream = httpURLConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            StringBuffer stringBuffer = new StringBuffer();
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                stringBuffer.append(line);
-            }
-            responseString = stringBuffer.toString();
-            bufferedReader.close();
-            inputStreamReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            if(inputStream !=null)
-            {
-                inputStream.close();
-            }
-            httpURLConnection.disconnect();
         }
-        return responseString;
-    }
-
-    private String getRequestUrl(LatLng origin, LatLng dest) {
-        //Value of origin
-        String str_org = "origin=" + origin.latitude + "," + origin.longitude;
-        //Value of destination
-        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-        //Set value enable the sensor
-        String sensor = "sensor=false";
-        //Mode for find direction
-        String mode = "mode=driving";
-        String key = "&key="+ "AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88";
-        //Build the full param
-        String param = str_org + "&" + str_dest + "&" + sensor + "&" + mode+ "&" + key;
-        //output format
-        String output = "json";
-
-        //Create url to request
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param ;
-        return url;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 44) {
@@ -283,77 +205,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
-    public class TaskRequestDirection extends AsyncTask<String, Void, String >
-    {
 
-        @Override
-        protected String doInBackground(String... strings) {
-            String responseString = ";";
-            try {
-                responseString = requestDirection(strings[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return responseString;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            TaskParser taskParser = new TaskParser();
-            taskParser.execute(s);
-        }
-    }
-    public class TaskParser extends AsyncTask<String, Void,List<List<HashMap<String, String>>>>
-    {
-
-        @Override
-        protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
-            JSONObject jasonObject = null;
-            List<List<HashMap<String, String>>> routes = null;
-
-            try {
-                jasonObject = new JSONObject(strings[0]);
-                DirectionsParser directionsParser = new DirectionsParser();
-                routes = directionsParser.parse(jasonObject);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return routes;
-
-        }
-
-        @Override
-        protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
-            ArrayList points = null;
-            PolylineOptions polylineOptions = null;
-            for(List<HashMap<String, String>> path : lists)
-            {
-                points = new ArrayList();
-                polylineOptions = new PolylineOptions();
-                for(HashMap<String, String> point : path)
-                {
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lon = Double.parseDouble(point.get("lon"));
-
-                    points.add(new LatLng(lat, lon) );
-                }
-                polylineOptions.addAll(points);
-                polylineOptions.width(15);
-                polylineOptions.color(0xFF0000FF);
-                polylineOptions.geodesic(true);
-                map.addPolyline(polylineOptions);
-            }
-
-            if(polylineOptions!=null)
-            {
-                map.addPolyline(polylineOptions);
-            }else
-            {
-                Toast.makeText(getContext(), "Direction not found!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
 
 

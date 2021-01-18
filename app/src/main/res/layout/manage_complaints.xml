@@ -17,9 +17,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driverFullName"
-            android:text="Full Name"
-            android:textSize="25dp"
+            android:id="@+id/complaint"
+            android:text="Type of complaint"
+            android:textSize="20dp"
             android:textColor="@android:color/holo_orange_light"
             android:fontFamily="sans-serif-medium"
             android:paddingLeft="20dp"
@@ -27,24 +27,24 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driveremail"
-            android:text="Email"
+            android:id="@+id/complaintstatus"
+            android:text="Status"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:textSize="18dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driveraddress"
-            android:text="Address"
+            android:id="@+id/complainee"
+            android:text="Complainer"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:textSize="18dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driverdob"
-            android:text="DOB"
+            android:id="@+id/complaintDate"
+            android:text="Date"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:textSize="18dp"/>
