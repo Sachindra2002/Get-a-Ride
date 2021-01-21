@@ -30,13 +30,13 @@ public class ManageComplaintAdapterClass extends FirebaseRecyclerAdapter<Complai
         holder.status.setText(model.getStatus());
         holder.complainer.setText(model.getComplainee());
         holder.date.setText(model.getDate());
-
+        String id = getRef(position).getKey();
         holder.complaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
                 activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ViewFullComplaint(model.getComplaint(),model.getStatus(),model.getComplainee(),model.getDate(),model.getInquiry(), model.getId())).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ViewFullComplaint(model.getComplaint(),model.getStatus(),model.getComplainee(),model.getDate(),model.getInquiry(), id)).addToBackStack(null).commit();
             }
         });
     }

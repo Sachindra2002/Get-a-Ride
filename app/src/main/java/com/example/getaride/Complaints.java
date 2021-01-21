@@ -1,16 +1,14 @@
 package com.example.getaride;
 
 public class Complaints {
-    String inquiry, complaint, id, complainee, status, date;
+    String inquiry, complaint, complainee, status, date;
 
     public Complaints() {
     }
 
-    public Complaints(String inquiry, String complaint, String id, String complainee, String status, String date) {
-
+    public Complaints(String inquiry, String complaint, String complainee, String status, String date) {
         this.inquiry = inquiry;
         this.complaint = complaint;
-        this.id = id;
         this.complainee = complainee;
         this.status = status;
         this.date = date;
@@ -30,14 +28,6 @@ public class Complaints {
 
     public void setComplaint(String complaint) {
         this.complaint = complaint;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getComplainee() {

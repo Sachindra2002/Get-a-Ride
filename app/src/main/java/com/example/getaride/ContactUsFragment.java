@@ -8,27 +8,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 public class ContactUsFragment extends Fragment implements View.OnClickListener{
     private Spinner spinner;
     Button inquirysubmit;
     EditText inquirytext;
-    private DatabaseReference mDatabase;
+    DatabaseReference mDatabase;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,9 +38,6 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
         String complaint = spinner.getSelectedItem().toString();
         inquirysubmit = v.findViewById(R.id.submitinquiry);
         inquirysubmit.setOnClickListener(this);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
         return v;
     }
 
@@ -63,17 +56,17 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Complaints");
         String Date = date.toString();
         String Complaint = spinner.getSelectedItem().toString();
         String Inquiry = inquirytext.getText().toString().trim();
         String status = "pending";
         String uid = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        Random rand = new Random(); //instance of random class
-        int upperbound = 10000;
-        //generate random values from 0-24
-        int complaintID = rand.nextInt(upperbound);
-        String id = String.valueOf(complaintID);
+/*        Random rand = new Random(); //instance of random class
+//        int upperbound = 10000;
+//        //generate random values from 0-24
+//        int complaintID = rand.nextInt(upperbound);
+//        String id = String.valueOf(complaintID);*/
 
         if(Inquiry.isEmpty())
         {
@@ -81,8 +74,8 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
             inquirytext.requestFocus();
             return;
         }
-        Complaints complaint = new Complaints(Complaint, Inquiry, id, uid, status, Date);
-        mDatabase.child("Complaints").child(id).setValue(complaint).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Complaints complaint = new Complaints(Complaint, Inquiry, uid, status, Date);
+        mDatabase.push().setValue(complaint);/*.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
@@ -93,6 +86,6 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(getContext(), "Inquiry not submitted", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 }

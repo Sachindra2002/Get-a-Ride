@@ -38,8 +38,8 @@ public class ViewFullComplaint extends Fragment implements View.OnClickListener 
     String complaint, status, complainee, date, inquiry, id;
     TextView Complaint, Status, Complainee, Date, Inquiry;
     Button Respond;
+    int Position;
     DatabaseReference databaseReference;
-
     public ViewFullComplaint(String complaint, String status, String complainee, String date, String inquiry, String id) {
 
         this.complaint = complaint;
@@ -68,7 +68,7 @@ public class ViewFullComplaint extends Fragment implements View.OnClickListener 
         Complainee.setText(complainee);
         Date.setText(date);
         Inquiry.setText(complaint);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
+
         return v;
     }
 
@@ -88,15 +88,14 @@ public class ViewFullComplaint extends Fragment implements View.OnClickListener 
     }
 
     private void sendResponseEmail() {
-
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
         String recipient = complainee;
         String STatus = status;
-        String ID = id;
         String response = "Responded";
         String sEmail = "getaridelk@gmail.com";
         String sPass = "getarideassignment";
 
-        databaseReference.child(ID).child("status").setValue(response).addOnCompleteListener(new OnCompleteListener<Void>() {
+       databaseReference.child(id).child("status").setValue(response).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
