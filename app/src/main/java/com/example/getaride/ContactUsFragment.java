@@ -8,11 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -62,12 +65,6 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
         String Inquiry = inquirytext.getText().toString().trim();
         String status = "pending";
         String uid = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-/*        Random rand = new Random(); //instance of random class
-//        int upperbound = 10000;
-//        //generate random values from 0-24
-//        int complaintID = rand.nextInt(upperbound);
-//        String id = String.valueOf(complaintID);*/
-
         if(Inquiry.isEmpty())
         {
             inquirytext.setError("Please enter the details");
@@ -75,7 +72,7 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
             return;
         }
         Complaints complaint = new Complaints(Complaint, Inquiry, uid, status, Date);
-        mDatabase.push().setValue(complaint);/*.addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.push().setValue(complaint).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
@@ -86,6 +83,6 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(getContext(), "Inquiry not submitted", Toast.LENGTH_LONG).show();
                 }
             }
-        });*/
+        });
     }
 }

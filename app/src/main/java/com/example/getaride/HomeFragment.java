@@ -1,9 +1,6 @@
 package com.example.getaride;
 
-import android.Manifest;
 import android.app.TimePickerDialog;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,24 +8,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
@@ -44,23 +39,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     private final static int MY_PERMISSIONS_REQUEST = 32;
-    GoogleMap map;
-    SupportMapFragment mapFragment;
-    FusedLocationProviderClient client;
+    AutocompleteSupportFragment autocompleteSupportFragment;
+    AutocompleteSupportFragment autocompleteSupportFragment2;
     TextView usergreeting, greetingName;
-    ArrayList<LatLng> listPoints;
-    String pickup;
-    String dropOff;
-    EditText Pickup, Dropoff;
     TextView time;
-    private int mYear, mMonth, mDay, mHour, mMinute;
-    FirebaseAuth firebaseAuth;
+    private int mHour, mMinute;
+    RadioGroup radioGroup;
+    String Pickup, Dropoff;
+    String Time;
+    String fullname;
+    DatabaseReference mDatabase;
+    Button getaRide;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -81,6 +75,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
         } else {
             usergreeting.setText("Null");
         }
+        getaRide = v.findViewById(R.id.getaride);
+        getaRide.setOnClickListener(this);
+        radioGroup = v.findViewById(R.id.vehicleradiogroup);
         time = v.findViewById(R.id.timepickup);
         final Calendar cal = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -89,17 +86,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
         String userid = user.getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
-         @Override
-         public void onDataChange(DataSnapshot dataSnapshot) {
-            String name = dataSnapshot.child("fullName").getValue().toString();
-            greetingName.setText(name);
-         }
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("fullName").getValue().toString();
+                greetingName.setText(name);
+                fullname = dataSnapshot.child("fullName").getValue().toString();
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-       // String name = user1.getFullName();
         greetingName = v.findViewById(R.id.greetingname);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,18 +110,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
                                                   int minute) {
 
                                 time.setText(hourOfDay + ":" + minute);
+                                Time = hourOfDay + ":" +minute;
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
 
             }
         });
-        listPoints = new ArrayList<>();
         String apikey = "AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88";
         Places.initialize(getContext(), apikey);
         PlacesClient placesClient = Places.createClient(getContext());
 
-        AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
         autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(
                 new LatLng(-33.880490, 151.184363),
@@ -131,15 +129,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
         ));
         autocompleteSupportFragment.setCountries("LK");
         autocompleteSupportFragment.setHint("Enter pick-up location");
-        ((EditText)autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(20.0f);
-        ((EditText)autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setTextColor(Color.WHITE);
-        ((EditText)autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setHintTextColor(Color.WHITE);
+        ((EditText) autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(20.0f);
+        ((EditText) autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setTextColor(Color.WHITE);
+        ((EditText) autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setHintTextColor(Color.WHITE);
         autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_button).setVisibility(View.GONE);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 Log.i(getTag(), "Place" + place.getName() + ", " + place.getId());
+                Pickup = place.getName();
+
             }
 
             @Override
@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
             }
         });
 
-        AutocompleteSupportFragment autocompleteSupportFragment2 = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment2);
+        autocompleteSupportFragment2 = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment2);
         autocompleteSupportFragment2.setTypeFilter(TypeFilter.ESTABLISHMENT);
         autocompleteSupportFragment2.setLocationBias(RectangularBounds.newInstance(
                 new LatLng(-33.880490, 151.184363),
@@ -157,9 +157,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
         int s = 424141;
         autocompleteSupportFragment2.setCountries("LK");
         //autocompleteSupportFragment2.getView().setBackgroundColor(Color.WHITE);
-        ((EditText)autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(20.0f);
-        ((EditText)autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setTextColor(Color.WHITE);
-        ((EditText)autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setHintTextColor(Color.WHITE);
+        ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(20.0f);
+        ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setTextColor(Color.WHITE);
+        ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setHintTextColor(Color.WHITE);
         autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_button).setVisibility(View.GONE);
         autocompleteSupportFragment2.setHint("Where To?");
         autocompleteSupportFragment2.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME));
@@ -167,6 +167,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 Log.i(getTag(), "Place" + place.getName() + ", " + place.getId());
+                Dropoff = place.getName();
             }
 
             @Override
@@ -175,197 +176,76 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, View.O
             }
         });
 
-        //searchView = v.findViewById(R.id.search);
-/*        mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);*/
-
-        client = LocationServices.getFusedLocationProviderClient(getActivity());
-/*
-
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation();
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-*/
-
         return v;
-    }
-
-
-/*    private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
-            return;
-        }
-        Task<Location> task = client.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    mapFragment.getMapAsync(new OnMapReadyCallback() {
-                        @Override
-                        public void onMapReady(GoogleMap googleMap) {
-                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            MarkerOptions options = new MarkerOptions().position(latLng).title("I am there");
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                            googleMap.addMarker(options);
-                        }
-                    });
-                }
-            }
-        });
-    }*/
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            getContext(), R.raw.mapstyle));
-
-            if (!success) {
-                Log.e(getTag(), "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e(getTag(), "Can't find style. Error: ", e);
-        }
-        map = googleMap;
-        map.getUiSettings().setZoomControlsEnabled(true);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
-            return;
-        }
-        map.setMyLocationEnabled(true);
-
-        }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 44) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
-                    return;
-                }
-                map.setMyLocationEnabled(true);
-            }
-        }
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.getaride:
+                GetARide();
+                break;
+        }
+    }
+
+    private void GetARide() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Rides");
+        String vehicleType = null;
+        String pickup = Pickup;
+        String dropoff = Dropoff;
+        String status = "pending";
+        String driverName = "Pending";
+        String time = Time;
+        String Name = fullname;
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        if(pickup == null)
+        {
+            Toast.makeText(getContext(), "Please enter a pick up location", Toast.LENGTH_SHORT).show();
+            ((EditText) autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).setError("Please enter a pick up location");
+            ((EditText) autocompleteSupportFragment.getView().findViewById(R.id.places_autocomplete_search_input)).requestFocus();
+            return;
+        }
+        if(dropoff == null)
+        {
+            Toast.makeText(getContext(), "Please enter a destination", Toast.LENGTH_SHORT).show();
+            ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setError("Please enter a destination");
+            ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).requestFocus();
+            return;
+        }
+        int radioID = radioGroup.getCheckedRadioButtonId();
+        switch (radioID) {
+            case R.id.sedan:
+                vehicleType = "Sedan";
+                break;
+
+            case R.id.miniCar:
+                vehicleType = "Mini Car";
+                break;
+            case R.id.miniVan:
+                vehicleType = "Mini Van";
+                break;
+            case R.id.van:
+                vehicleType = "Van";
+                break;
+        }
+
+        Rides ride = new Rides(Name, email, pickup, dropoff, driverName, vehicleType, time, status);
+        mDatabase.push().setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(getContext(), "Ride booked successfully!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getContext(), "Could not book ride :/", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*        if(!Places.isInitialized())
-        {
-            Places.initialize(getContext(), apikey);
-        }
-        placesClient = Places.createClient(getContext());
-
-        final AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autoComplete_fragment);
-
-        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.LAT_LNG,Place.Field.NAME));
-        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                 final LatLng latLng = place.getLatLng();
-                //Toast.makeText(getActivity(),""+latLng.latitude,Toast.LENGTH_SHORT ).show();
-
-                Log.i("Place Api", "onPlaceSelected: "+latLng.latitude+"\n"+latLng.longitude);
-            }
-
-            @Override
-            public void onError(@NonNull Status status) {
-
-            }
-        });*/
-
-/*
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, PLACES);
-        AutoCompleteTextView dropdown = (AutoCompleteTextView) v.findViewById(R.id.dropdown);
-        AutoCompleteTextView pickup = (AutoCompleteTextView) v.findViewById(R.id.pickup);
-        pickup.setAdapter(adapter);
-        dropdown.setAdapter(adapter);
-
-        String pickuplocation = pickup.getText().toString();
-        String dropdownlocation = pickup.getText().toString();*/
-
-
-/*   private static final String[] PLACES = new String[] {
-            "Colombo", "Apiit", "Union Place", "Negombo", "IIT", "Pettah",
-            "Kochikade", "CCC", "Sen-Saal Hyde Park", "Sen-Saal WTC", "Park Street Mews",
-            "Nawaloka", "Colombo City Centre", "Dinemore", "Hemas Holdings", "Arpico Hyde Park",
-            "Arpico Negombo", "Keels Dalupotha", "Keels Darley Road", "Keels Union Place",
-            "Hilton Colombo Residencies", "Slave Island", "One Galle Face", "Kollupitiya",
-            "Airport Depature Terminal", "Airport Arrivals Terminal", "Airport Parking", "Gflock",
-            "Durdans Hospital"
-    };*/
-
-
-/*        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                String location = searchView.getQuery().toString();
-                List<Address> addressList = null;
-
-                if (location != null || !location.equals("")) {
-                    Geocoder geocoder = new Geocoder(getContext());
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng).title(location));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        mapFragment.getMapAsync(this);*/
-
-
-/*if(listPoints.size() == 2)
-                {
-                    listPoints.clear();
-                    map.clear();
-                }
-                listPoints.add(latLng);
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-
-                if(listPoints.size() == 1)
-                {
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                }else
-                {
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                }
-                map.addMarker(markerOptions);*/
 
 
 

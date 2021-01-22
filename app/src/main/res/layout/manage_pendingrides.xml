@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardCornerRadius="12dp"
+    android:layout_margin="10dp"
+    android:elevation="90dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="#2D2D2D"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pendingdestination"
+            android:text="Destination"
+            android:padding="7dp"
+            android:drawableTint="@color/white"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/arrival"
+            android:textSize="25dp"
+            android:textColor="@android:color/holo_orange_light"
+            android:fontFamily="sans-serif-medium"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pendingpickup"
+            android:padding="7dp"
+            android:drawableLeft="@drawable/pickup"
+            android:drawablePadding="30dp"
+            android:text="Pick Up"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pendingtime"
+            android:text="Time"
+            android:padding="7dp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/ic_clock"
+            android:paddingTop="5dp"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
+            android:drawablePadding="30dp"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pendingstatus"
+            android:text="Status"
+            android:padding="7dp"
+            android:drawableLeft="@drawable/pending"
+            android:drawablePadding="30dp"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:drawableTint="@color/white"
+            android:paddingTop="5dp"
+            android:textSize="18dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

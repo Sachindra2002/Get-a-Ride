@@ -78,7 +78,7 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/getaride"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:background="@android:color/holo_orange_dark"
@@ -90,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.91" />
+        app:layout_constraintVertical_bias="0.908" />
 
     <TextView
         android:id="@+id/good"

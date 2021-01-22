@@ -68,6 +68,8 @@ public class Dispatcher extends AppCompatActivity implements NavigationView.OnNa
                 break;
             case R.id.nav_complaints: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageComplaintsFragment()).commit();
                 break;
+            case R.id.nav_pendingrides: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageRidesFragment()).commit();
+                break;
             case R.id.nav_signout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent  = new Intent(Dispatcher.this, LoginActivity.class);

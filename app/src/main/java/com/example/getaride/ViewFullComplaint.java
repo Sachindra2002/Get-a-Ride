@@ -119,7 +119,7 @@ public class ViewFullComplaint extends Fragment implements View.OnClickListener 
                         message.setFrom(new InternetAddress(sEmail));
                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
                         message.setSubject("Complaint Looked Through");
-                        message.setText("Thank you for contacting us, your complaint has been looked through and will be checked");
+                        message.setText("Thank you for contacting us, your complaint has been looked through and is under investigation");
                         new sendMail().execute(message);
                     } catch (MessagingException e) {
                         e.printStackTrace();
