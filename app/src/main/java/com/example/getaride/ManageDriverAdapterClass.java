@@ -28,9 +28,9 @@ public class ManageDriverAdapterClass extends FirebaseRecyclerAdapter<Users, Man
     @Override
     protected void onBindViewHolder(@NonNull ManagedriverList holder, int position, @NonNull Users model) {
         holder.fullname.setText(model.getFullName());
-        holder.email.setText(model.getEmail());
-        holder.address.setText(model.getAddress());
-        holder.dob.setText(model.getDob());
+        holder.email.setText("Vehicle Type : "+model.getVehicleType());
+        holder.address.setText("Driver Location : "+model.getCurrentLocation());
+        holder.dob.setText("Driver Status : "+model.getStatus());
         String keyId = this.getRef(position).getKey();
         holder.fullname.setOnClickListener(new View.OnClickListener() {
             @Override

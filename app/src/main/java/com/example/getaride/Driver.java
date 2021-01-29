@@ -13,7 +13,7 @@ public class Driver extends AppCompatActivity {
 
         if(savedInstanceState == null)
         {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DriverHomeFragment()).commit();
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverHomeFragment()).commit();
         }
     }
 }

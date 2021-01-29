@@ -5,23 +5,49 @@
     android:layout_height="match_parent"
     tools:context=".Driver"
     android:background="@color/black">
-<!--
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/driver_bottommenu"
-        app:itemIconTint="@color/white"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/nav_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Get a Ride"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container3"></FrameLayout>
+
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation_view"
+        android:background="@color/black"
+        android:layout_gravity = "start"
+        app:headerLayout="@layout/nav_header"
         app:itemTextColor="@color/white"
-        android:background="?android:background"/>-->
+        app:itemIconTint="@android:color/holo_orange_dark"
+        app:menu="@menu/driver_menu">
 
-<!--
-    <FrameLayout
-        android:id="@+id/fragment_container2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>-->
+    </com.google.android.material.navigation.NavigationView>
 
 
 

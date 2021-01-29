@@ -1,5 +1,6 @@
 package com.example.getaride;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -39,20 +41,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private final static int MY_PERMISSIONS_REQUEST = 32;
     AutocompleteSupportFragment autocompleteSupportFragment;
     AutocompleteSupportFragment autocompleteSupportFragment2;
     TextView usergreeting, greetingName;
-    TextView time;
+    TextView time, Date;
     private int mHour, mMinute;
     RadioGroup radioGroup;
     String Pickup, Dropoff;
-    String Time;
-    String fullname;
+    String Time, Ddate;
+    String fullname, contact;
     DatabaseReference mDatabase;
     Button getaRide;
 
@@ -79,6 +83,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         getaRide.setOnClickListener(this);
         radioGroup = v.findViewById(R.id.vehicleradiogroup);
         time = v.findViewById(R.id.timepickup);
+        Date = v.findViewById(R.id.timedate);
+        greetingName = v.findViewById(R.id.greetingname);
         final Calendar cal = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
@@ -98,7 +104,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-        greetingName = v.findViewById(R.id.greetingname);
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Users");
+        ref1.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String number = dataSnapshot.child("phone").getValue().toString();
+                //greetingName.setText(number);
+                contact = dataSnapshot.child("phone").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,9 +132,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 time.setText(hourOfDay + ":" + minute);
                                 Time = hourOfDay + ":" +minute;
                             }
-                        }, mHour, mMinute, false);
+                        }, mHour, mMinute, true);
                 timePickerDialog.show();
 
+            }
+        });
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.MONTH, monthOfYear);
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                Date.setText(sdf.format(cal.getTime()));
+                Ddate = sdf.format(cal.getTime());
+            }
+
+        };
+        Date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getContext(), date, cal
+                        .get(Calendar.YEAR), cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         String apikey = "AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88";
@@ -190,13 +241,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void GetARide() {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Rides");
+        String dDate = Ddate;
         String vehicleType = null;
         String pickup = Pickup;
         String dropoff = Dropoff;
         String status = "pending";
         String driverName = "Pending";
         String time = Time;
+        String number = contact;
         String Name = fullname;
+        String driverNumber = "pending";
+        String vehicleNumber = "pending";
+        String logStart = "pending";
+        String logEnd = "pending";
+        String price = "pending";
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         if(pickup == null)
         {
@@ -211,6 +269,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).setError("Please enter a destination");
             ((EditText) autocompleteSupportFragment2.getView().findViewById(R.id.places_autocomplete_search_input)).requestFocus();
             return;
+        }
+        if(time == null)
+        {
+            time = "immediate";
         }
         int radioID = radioGroup.getCheckedRadioButtonId();
         switch (radioID) {
@@ -229,7 +291,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
-        Rides ride = new Rides(Name, email, pickup, dropoff, driverName, vehicleType, time, status);
+        Rides ride = new Rides(Name, email, pickup, dropoff, driverName, vehicleType, time, status, dDate, number, driverNumber, vehicleNumber, logStart, logEnd, price);
         mDatabase.push().setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

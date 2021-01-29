@@ -2,12 +2,12 @@ package com.example.getaride;
 
 public class Rides {
 
-    String customerName, customerEmail, pickup, dropoff, drivername, vehicletype, time, status;
+    String customerName, customerEmail, pickup, dropoff, drivername, vehicletype, time, status, date, customernumber, driverNumber, vehicleNumber, logStart, logEnd, price;
 
     public Rides() {
     }
 
-    public Rides(String customerName, String customerEmail, String pickup, String dropoff, String drivername, String vehicletype, String time, String status) {
+    public Rides(String customerName, String customerEmail, String pickup, String dropoff, String drivername, String vehicletype, String time, String status, String date, String customernumber, String driverNumber, String vehicleNumber, String logStart, String logEnd, String price) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.pickup = pickup;
@@ -16,6 +16,13 @@ public class Rides {
         this.vehicletype = vehicletype;
         this.time = time;
         this.status = status;
+        this.date = date;
+        this.customernumber = customernumber;
+        this.driverNumber = driverNumber;
+        this.vehicleNumber = vehicleNumber;
+        this.logStart = logStart;
+        this.logEnd = logEnd;
+        this.price = price;
     }
 
     public String getCustomerName() {
@@ -80,5 +87,61 @@ public class Rides {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCustomernumber() {
+        return customernumber;
+    }
+
+    public void setCustomernumber(String customernumber) {
+        this.customernumber = customernumber;
+    }
+
+    public String getDriverNumber() {
+        return driverNumber;
+    }
+
+    public void setDriverNumber(String driverNumber) {
+        this.driverNumber = driverNumber;
+    }
+
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public String getLogStart() {
+        return logStart;
+    }
+
+    public void setLogStart(String logStart) {
+        this.logStart = logStart;
+    }
+
+    public String getLogEnd() {
+        return logEnd;
+    }
+
+    public void setLogEnd(String logEnd) {
+        this.logEnd = logEnd;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

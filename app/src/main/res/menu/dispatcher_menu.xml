@@ -17,6 +17,12 @@
 
         </item>
         <item
+            android:id="@+id/nav_ongoingrides"
+            android:title="Ongoing Rides"
+            android:icon="@drawable/ongoing">
+
+        </item>
+        <item
             android:id="@+id/nav_pastrides"
             android:title="Past Rides"
             android:icon="@drawable/pastrides">
@@ -38,7 +44,7 @@
         <item
             android:id="@+id/nav_managedriver"
             android:title="Manage Drivers"
-            android:icon="@drawable/ic_rating">
+            android:icon="@drawable/drivers">
         </item>
         <item
             android:id="@+id/nav_adddriver"
@@ -52,10 +58,21 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_myschedule"
+                    android:title="My Schedule"
+                    android:icon="@drawable/schedule">
+                </item>
+                <item
                     android:id="@+id/nav_profile"
                     android:title="My Profile"
                     android:icon="@drawable/profile">
                 </item>
+                <item
+                    android:id="@+id/nav_mysettings"
+                    android:title="Settings"
+                    android:icon="@drawable/settings2">
+                </item>
+
             </group>
 
         </menu>

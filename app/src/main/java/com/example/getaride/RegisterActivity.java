@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
 
             private void updateLabel() {
-                String myFormat = "MM/dd/yyyy"; //In which you need put here
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
                 birthday.setText(sdf.format(myCalendar.getTime()));

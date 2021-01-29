@@ -26,17 +26,17 @@ public class ManageRidesAdapterclass extends FirebaseRecyclerAdapter<Rides, Mana
 
     @Override
     protected void onBindViewHolder(@NonNull ManageRidesAdapterclass.ManagePendingRidesList holder, int position, @NonNull Rides model) {
-        holder.Destination.setText(model.dropoff);
-        holder.pickup.setText(model.pickup);
-        holder.time.setText(model.time);
-        holder.status.setText(model.status);
+        holder.Destination.setText(model.getDropoff());
+        holder.pickup.setText(model.getPickup());
+        holder.time.setText(model.getTime());
+        holder.status.setText(model.getDate());
         String keyId = this.getRef(position).getKey();
         holder.Destination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
                 activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new AssignRideFragment(model.getDropoff(),model.getPickup(),model.getTime(),model.getStatus(),model.getCustomerName(), model.getCustomerEmail(), model.getDrivername(), model.getVehicletype(), keyId)).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new AssignRideFragment(model.getDropoff(),model.getPickup(),model.getTime(),model.getStatus(),model.getCustomerName(), model.getCustomerEmail(), model.getDrivername(), model.getVehicletype(),model.getCustomernumber(), model.getDate(),model.getDriverNumber(),model.getVehicleNumber(), keyId)).addToBackStack(null).commit();
             }
         });
     }

@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +42,7 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
     private ProgressBar progressbar;
     private Button buttonregister;
     private FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
         buttonregister = v.findViewById(R.id.signupbuttondriver);
         buttonregister.setOnClickListener(this);
         address = v.findViewById(R.id.addressdriver);
-        vehicleType = spinner.getSelectedItem().toString();
+        //vehicleType = spinner.getSelectedItem().toString();
         vehicleNumber = v.findViewById(R.id.vehicleNumber);
 
         final Calendar myCalendar = Calendar.getInstance();
@@ -79,7 +81,7 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
             }
 
             private void updateLabel() {
-                String myFormat = "MM/dd/yyyy"; //In which you need put here
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
                 birthday.setText(sdf.format(myCalendar.getTime()));
@@ -112,13 +114,14 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
     }
 
     private void registerDriver() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Schedules");
         String name = fullname.getText().toString().trim();
         String Email = email.getText().toString().trim();
         String number = phoneno.getText().toString().trim();
         String pass = password.getText().toString().trim();
         String Address = address.getText().toString().trim();
         String bday = birthday.getText().toString().trim();
-        String VehicalType = vehicleType;
+        String VehicalType = spinner.getSelectedItem().toString();
         String VehicleNumber = vehicleNumber.getText().toString().trim();
         String role = "driver";
         String status = "Available";
@@ -179,15 +182,18 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
             password.requestFocus();
             return;
         }
-
-
+        String location = "Not assigned";
+        String date = "Not assigned";
+        String startTime = "Not assigned";
+        String endTime = "Not assgned";
+        Schedule schedule = new Schedule(name, location, date, startTime, endTime);
 
         progressbar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(Email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Users user = new Users(name, Email, number, bday, Address, VehicleNumber, vehicleType, role, status, currentLocation);
+                    Users user = new Users(name, Email, number, bday, Address, VehicleNumber, VehicalType, role, status, currentLocation);
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
                             getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -196,6 +202,7 @@ public class AddDriverFragment extends Fragment implements View.OnClickListener{
                             {
                                 Toast.makeText(getContext(), "Driver registered Successfully", Toast.LENGTH_LONG).show();
                                 progressbar.setVisibility(View.GONE);
+                                mDatabase.push().setValue(schedule);
                             }
                             else{
                                 Toast.makeText(getContext(), "Driver not registered sucessfully", Toast.LENGTH_LONG).show();
