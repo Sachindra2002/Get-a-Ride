@@ -62,15 +62,21 @@ public class Dispatcher extends AppCompatActivity implements NavigationView.OnNa
         {
             case R.id.nav_home2: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DispatcherHomeFragment()).commit();
                 break;
-            case R.id.nav_adddriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new AddDriverFragment()).commit();
+            case R.id.nav_adddriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new AddDriverFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_managedriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageDriversFragment()).commit();
+            case R.id.nav_managedriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageDriversFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_complaints: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageComplaintsFragment()).commit();
+            case R.id.nav_complaints: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageComplaintsFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_schedule: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageScheduleFragment()).commit();
+            case R.id.nav_schedule: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageScheduleFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_pendingrides: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageRidesFragment()).commit();
+            case R.id.nav_pendingrides: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ManageRidesFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_myschedule: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DispatcherScheduleFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_profiledispatcher: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DispatcherProfileFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_mysettingsdispatcher: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DispatcherSettings()).addToBackStack(null).commit();
                 break;
             case R.id.nav_signout:
                 FirebaseAuth.getInstance().signOut();

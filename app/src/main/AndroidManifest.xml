@@ -14,7 +14,8 @@
         android:theme="@style/Theme.GetARide">
         <activity android:name=".Dispatcher"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".Driver" />
+        <activity android:name=".Driver"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

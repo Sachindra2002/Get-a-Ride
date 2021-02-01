@@ -1,10 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Driver"
-    android:background="@color/black">
+    tools:context=".Dispatcher"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,7 +44,7 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigation_view3"
         android:background="@color/black"
         android:layout_gravity = "start"
         app:headerLayout="@layout/nav_header"
@@ -49,6 +54,4 @@
 
     </com.google.android.material.navigation.NavigationView>
 
-
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

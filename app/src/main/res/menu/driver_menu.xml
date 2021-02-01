@@ -2,5 +2,68 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn = "navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home3"
+            android:title="Home"
+            android:icon="@drawable/ic_baseline_home_24">
+
+        </item>
+        <item
+            android:id="@+id/nav_ongoingridesdriver"
+            android:title="Ongoing Rides"
+            android:icon="@drawable/ongoing">
+
+        </item>
+        <item
+            android:id="@+id/nav_pastridesdriver"
+            android:title="Past Rides"
+            android:icon="@drawable/pastrides">
+
+        </item>
+        <item
+            android:id="@+id/nav_scheduledriver"
+            android:title="Manage Schedule"
+            android:icon="@drawable/schedule">
+
+        </item>
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_myscheduledriver"
+                    android:title="My Schedule"
+                    android:icon="@drawable/schedule">
+                </item>
+                <item
+                    android:id="@+id/nav_profiledriver"
+                    android:title="My Profile"
+                    android:icon="@drawable/profile">
+                </item>
+                <item
+                    android:id="@+id/nav_mysettingsdriver"
+                    android:title="Settings"
+                    android:icon="@drawable/settings2">
+                </item>
+
+            </group>
+
+        </menu>
+    </item>
+    <item android:title="Sign Out">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_signoutdriver"
+                    android:title="Sign Out"
+                    android:icon="@drawable/ic_logout"
+                    android:iconTint="@color/black"
+                    >
+                </item>
+            </group>
+        </menu>
+    </item>
 
 </menu>
