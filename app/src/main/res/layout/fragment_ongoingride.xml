@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/customerdestinationongoingride2"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:drawableLeft="@drawable/arrival"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:padding="5dp"
+        android:text="Destination"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <TextView
+        android:id="@+id/customerpickupongoingride2"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:drawableLeft="@drawable/pickup"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:padding="5dp"
+        android:text="Pick up"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
+
+    <TextView
+        android:id="@+id/customernameongoingride2"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:padding="9dp"
+        android:text="Customer Name"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <Button
+        android:id="@+id/updateridestatus"
+        android:layout_width="172dp"
+        android:layout_height="40dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <Button
+        android:id="@+id/callcustomer2"
+        android:layout_width="172dp"
+        android:layout_height="40dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Call Customer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <EditText
+        android:id="@+id/logend"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:hint="Enter Mileage"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <Button
+        android:id="@+id/endride"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Ride Complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ongoing Ride"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Spinner
+        android:id="@+id/updateridestatusspinner"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Ride Status"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -132,11 +132,15 @@ public class AssignRideFragment extends Fragment implements View.OnClickListener
         }
     }
     private void assignRide() {
+        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("PendingRides");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rides");
         String sEmail = "getaridelk@gmail.com";
         String sPass = "getarideassignment";
         String recipient = customerEmail;
         String status = "assigned";
+        String logStart = "pending";
+        String logEnd = "pending";
+        String price = "pending";
         Map<String, Object> update = new HashMap<>();
         //mDatabase = FirebaseDatabase.getInstance().getReference().child("Rides");
         String driverName = spinner.getSelectedItem().toString();
@@ -156,6 +160,8 @@ public class AssignRideFragment extends Fragment implements View.OnClickListener
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful())
                             {
+                                Rides ride = new Rides(customerName, customerEmail, pickup, dropoff, driverName, vehicleType, time, status, date, customernumber, phoneDriver, vehicleNumber, logStart, logEnd, price);
+                                databaseReference2.push().setValue(ride);
                                 Toast.makeText(getContext(), "Ride assigned Successfully!", Toast.LENGTH_SHORT).show();
                                 Properties properties = new Properties();
                                 properties.put("mail.smtp.auth", "true");

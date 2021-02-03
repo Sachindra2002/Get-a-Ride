@@ -10,19 +10,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="140dp"
         android:orientation="vertical"
-        android:background="#2D2D2D"
+        android:background="#424141"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pendingdestination"
-            android:text="Destination"
-            android:padding="7dp"
-            android:drawableTint="@color/white"
-            android:drawablePadding="30dp"
-            android:drawableLeft="@drawable/arrival"
+            android:id="@+id/viewpastlocationsdriver"
+            android:text="Pickup to dropoff"
             android:textSize="25dp"
             android:textColor="@android:color/holo_orange_light"
             android:fontFamily="sans-serif-medium"
@@ -31,40 +27,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pendingpickup"
-            android:padding="7dp"
-            android:drawableLeft="@drawable/pickup"
-            android:drawablePadding="30dp"
-            android:text="Pick Up"
-            android:drawableTint="@color/white"
-            android:textColor="@color/white"
+            android:id="@+id/viewpastdatedriver"
+            android:text="Date"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
+
         <TextView
+            android:id="@+id/viewpasttimedriver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pendingtime"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
             android:text="Time"
-            android:padding="7dp"
-            android:paddingLeft="20dp"
-            android:drawableLeft="@drawable/ic_clock"
-            android:paddingTop="5dp"
-            android:drawableTint="@color/white"
-            android:textColor="@color/white"
-            android:drawablePadding="30dp"
-            android:textSize="20dp"/>
+            android:textSize="18dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pendingstatus"
-            android:text="Status"
-            android:padding="7dp"
-            android:drawableLeft="@drawable/pending22"
-            android:drawablePadding="30dp"
-            android:textColor="@color/white"
+            android:id="@+id/viewpastcustomernamedriver"
+            android:text="Customer Name"
             android:paddingLeft="20dp"
-            android:drawableTint="@color/white"
             android:paddingTop="5dp"
             android:textSize="18dp"/>
 

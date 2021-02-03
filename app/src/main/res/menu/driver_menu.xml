@@ -10,6 +10,12 @@
 
         </item>
         <item
+            android:id="@+id/nav_pendingridesdriver"
+            android:title="Upcoming Rides"
+            android:icon="@drawable/pending">
+
+        </item>
+        <item
             android:id="@+id/nav_ongoingridesdriver"
             android:title="Ongoing Rides"
             android:icon="@drawable/ongoing">
@@ -19,12 +25,6 @@
             android:id="@+id/nav_pastridesdriver"
             android:title="Past Rides"
             android:icon="@drawable/pastrides">
-
-        </item>
-        <item
-            android:id="@+id/nav_scheduledriver"
-            android:title="Manage Schedule"
-            android:icon="@drawable/schedule">
 
         </item>
     </group>

@@ -27,9 +27,9 @@ public class ManageSchedulesAdapterclass extends FirebaseRecyclerAdapter<Schedul
     @Override
     protected void onBindViewHolder(@NonNull ManageShedules holder, int position, @NonNull Schedule model) {
         holder.driverName.setText(model.getFullName());
-        holder.date.setText(model.getDate());
-        holder.sTime.setText(model.getsTime());
-        holder.eTime.setText(model.geteTime());
+        holder.date.setText("Date : "+model.getDate());
+        holder.sTime.setText("Start Time : "+model.getsTime());
+        holder.eTime.setText("End Time : "+model.geteTime());
         String keyId = this.getRef(position).getKey();
         holder.driverName.setOnClickListener(new View.OnClickListener() {
             @Override
