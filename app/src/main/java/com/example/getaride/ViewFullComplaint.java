@@ -83,6 +83,7 @@ public class ViewFullComplaint extends Fragment implements View.OnClickListener 
             case R.id.respond:
                 sendResponseEmail();
                 break;
+
         }
 
     }

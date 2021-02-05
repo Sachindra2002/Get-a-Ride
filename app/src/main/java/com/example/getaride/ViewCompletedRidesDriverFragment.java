@@ -30,7 +30,7 @@ public class ViewCompletedRidesDriverFragment extends Fragment {
         allpastridelist.setHasFixedSize(true);
         allpastridelist.setLayoutManager(new LinearLayoutManager(getContext()));
         FirebaseRecyclerOptions<Rides> pastRideList = new FirebaseRecyclerOptions.Builder<Rides>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("PastRides").orderByChild("drivername").equalTo(fullname), Rides.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Completed").orderByChild("drivername").equalTo(fullname), Rides.class)
                 .build();
 
 

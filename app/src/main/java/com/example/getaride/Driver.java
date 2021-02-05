@@ -99,6 +99,16 @@ public class Driver extends AppCompatActivity implements NavigationView.OnNaviga
                 fragment2.setArguments(bundle2);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, fragment2).addToBackStack(null).commit();
                 break;
+
+            case R.id.nav_myscheduledriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverScheduleFragment()).addToBackStack(null).commit();
+                break;
+
+            case R.id.nav_profiledriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverProfileFragment()).addToBackStack(null).commit();
+                break;
+
+            case R.id.nav_home3: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverHomeFragment()).addToBackStack(null).commit();
+                break;
+
             case R.id.nav_signoutdriver:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent  = new Intent(Driver.this, LoginActivity.class);

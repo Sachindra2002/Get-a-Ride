@@ -36,7 +36,7 @@ public class ViewAllPastRidesDriverAdapterClass extends FirebaseRecyclerAdapter<
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
                 activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new ViewPastRideDriver(model.getPickup(),model.getDropoff(), model.getCustomerEmail(), model.getCustomerName(), model.getCustomernumber(), model.getVehicleNumber(), model.getVehicletype(), model.getPrice(), model.getDrivername(), model.getLogStart(), model.getLogEnd(),keyId)).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new ViewPastRideDriver(model.getPickup(),model.getDropoff(), model.getCustomerName(), model.getPrice(), model.getLogStart(), model.getLogEnd(),model.getDate(), model.getTime())).addToBackStack(null).commit();
             }
         });
     }

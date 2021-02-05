@@ -27,7 +27,7 @@ public class ViewAllPastRidesFragment extends Fragment {
         allpastridelist.setHasFixedSize(true);
         allpastridelist.setLayoutManager(new LinearLayoutManager(getContext()));
         FirebaseRecyclerOptions<Rides> pastRideList = new FirebaseRecyclerOptions.Builder<Rides>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("PastRides"), Rides.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Completed"), Rides.class)
                 .build();
 
 

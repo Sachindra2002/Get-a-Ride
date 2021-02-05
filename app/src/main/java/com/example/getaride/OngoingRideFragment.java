@@ -187,7 +187,7 @@ public class OngoingRideFragment extends Fragment implements View.OnClickListene
                         message.setFrom(new InternetAddress(sEmail));
                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
                         message.setSubject("Ride Completed");
-                        message.setText("Your Ride is completed\n\n"+"Driver Name : "+drivername +"\n\n"+ "Vehicle Type : "+vehicletype+"\n\n"+"Vehicle Number : "+vehicleNumber+"\n\n"+"Total Distance travelled : "+totalDistance+"\n\n"+"Total Price : "+totalPrice+"\n\n"+"Thank you for choosing get a ride and have a nice day:)");
+                        message.setText("Your Ride is completed\n\n"+"Driver Name : "+drivername +"\n\n"+ "Vehicle Type : "+vehicletype+"\n\n"+"Vehicle Number : "+vehicleNumber+"\n\n"+"Total Distance travelled : "+totalDistance+"KM"+"\n\n"+"Total Price LKR : "+totalPrice+"\n\n"+"Thank you for choosing get a ride and have a nice day :)");
                         new sendMail().execute(message);
                     } catch (MessagingException e) {
                         e.printStackTrace();

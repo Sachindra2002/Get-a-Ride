@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <TextView
+        android:id="@+id/customerdestinationcompleteride"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:drawableLeft="@drawable/arrival"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:padding="5dp"
+        android:text="Destination"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348" />
+
+    <TextView
+        android:id="@+id/customertotalpricecompletedride"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Total Price"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.66" />
+
+    <TextView
+        android:id="@+id/customernamecompletedride"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@drawable/edit_text_border"
+        android:padding="9dp"
+        android:text="Customer Name"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <TextView
+        android:id="@+id/customerpickupcompletedride"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:drawableLeft="@drawable/pickup"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:padding="5dp"
+        android:text="Pick up"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
+
+    <TextView
+        android:id="@+id/customerdatecompletedride"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/customerstartlogcompletedride"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Start Log"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
+
+    <TextView
+        android:id="@+id/customerendlogcompletedride"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="End log"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
+
+    <TextView
+        android:id="@+id/customertimecompleteride"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Time"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Completed Ride"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+</androidx.constraintlayout.widget.ConstraintLayout>
