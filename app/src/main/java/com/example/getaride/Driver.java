@@ -108,6 +108,8 @@ public class Driver extends AppCompatActivity implements NavigationView.OnNaviga
 
             case R.id.nav_home3: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverHomeFragment()).addToBackStack(null).commit();
                 break;
+            case R.id.nav_mysettingsdriver: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container3, new DriverSettings()).addToBackStack(null).commit();
+                break;
 
             case R.id.nav_signoutdriver:
                 FirebaseAuth.getInstance().signOut();

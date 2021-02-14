@@ -90,6 +90,11 @@ public class DispatcherHomeFragment extends Fragment implements View.OnClickList
                 activity3.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 activity3.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new DispatcherScheduleFragment()).addToBackStack(null).commit();
                 break;
+            case R.id.ongoing:
+                AppCompatActivity activity4 = (AppCompatActivity)v.getContext();
+                activity4.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                activity4.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2, new ViewOngoingRidesDispatcherFragment()).addToBackStack(null).commit();
+                break;
 
         }
     }

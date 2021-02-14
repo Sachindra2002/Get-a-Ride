@@ -16,6 +16,16 @@
             android:icon="@drawable/profile">
         </item>
         <item
+            android:id="@+id/nav_upcomingridescustomer"
+            android:title="Upcoming Rides"
+            android:icon="@drawable/future">
+        </item>
+        <item
+            android:id="@+id/nav_ongoingridescustomer"
+            android:title="Ongoing Rides"
+            android:icon="@drawable/ongoing">
+        </item>
+        <item
             android:id="@+id/nav_rides"
             android:title="Past Rides"
             android:icon="@drawable/car">

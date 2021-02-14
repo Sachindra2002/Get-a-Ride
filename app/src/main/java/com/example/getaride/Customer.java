@@ -13,16 +13,38 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Customer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     FirebaseAuth mAuth;
+    String fullname;
     private FirebaseAuth.AuthStateListener mAuthstatelistener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userid = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("fullName").getValue().toString();
+                fullname = dataSnapshot.child("fullName").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         Toolbar toolbar =findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
@@ -67,6 +89,18 @@ public class Customer extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_home: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 break;
             case R.id.nav_contact: getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ContactUsFragment()).commit();
+                break;
+            case R.id.nav_rides: Bundle bundle2 = new Bundle();
+                bundle2.putString("key", fullname);
+                ViewPastRidesCustomerFragment fragment2 = new ViewPastRidesCustomerFragment();
+                fragment2.setArguments(bundle2);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment2).addToBackStack(null).commit();
+                break;
+            case R.id.nav_upcomingridescustomer: Bundle bundle1 = new Bundle();
+                bundle1.putString("key", fullname);
+                ViewUpcomingridesCustomerFragment fragment = new ViewUpcomingridesCustomerFragment();
+                fragment.setArguments(bundle1);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 break;
             case R.id.nav_signout:
                 FirebaseAuth.getInstance().signOut();

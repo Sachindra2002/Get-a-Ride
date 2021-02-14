@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardCornerRadius="12dp"
+    android:layout_margin="10dp"
+    android:elevation="90dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        android:background="#424141"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewallongoinglocationdispatcher"
+            android:text="Pickup to dropoff"
+            android:textSize="18dp"
+            android:textColor="@android:color/holo_orange_light"
+            android:fontFamily="sans-serif-medium"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewallongoingdatedispatcher"
+            android:text="Date"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/viewallongoingtimedispatcher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:text="Time"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewallongoingcustomerdispatcher"
+            android:text="Customer"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textSize="18dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
