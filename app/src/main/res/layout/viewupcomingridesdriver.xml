@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/viewupcominglocationsdriver"
             android:text="Pickup to dropoff"
-            android:textSize="25dp"
+            android:textSize="18dp"
             android:textColor="@android:color/holo_orange_light"
             android:fontFamily="sans-serif-medium"
             android:paddingLeft="20dp"
