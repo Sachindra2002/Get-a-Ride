@@ -11,6 +11,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.getaride.Fragments.ContactUsFragment;
+import com.example.getaride.Fragments.HomeFragment;
+import com.example.getaride.Recyclerviews.ViewPastRidesCustomerFragment;
+import com.example.getaride.Recyclerviews.ViewUpcomingridesCustomerFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

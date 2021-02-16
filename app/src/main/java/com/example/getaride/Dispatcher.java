@@ -11,6 +11,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.getaride.Fragments.AddDriverFragment;
+import com.example.getaride.Fragments.DispatcherHomeFragment;
+import com.example.getaride.Fragments.DispatcherProfileFragment;
+import com.example.getaride.Fragments.DispatcherScheduleFragment;
+import com.example.getaride.Fragments.DispatcherSettings;
+import com.example.getaride.Recyclerviews.ManageComplaintsFragment;
+import com.example.getaride.Recyclerviews.ManageDriversFragment;
+import com.example.getaride.Recyclerviews.ManageRidesFragment;
+import com.example.getaride.Recyclerviews.ManageScheduleFragment;
+import com.example.getaride.Recyclerviews.ViewAllPastRidesFragment;
+import com.example.getaride.Recyclerviews.ViewOngoingRidesDispatcherFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
