@@ -170,7 +170,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         cal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        String apikey = "AIzaSyAJNtKlSYJsqtn6oBdM7m-e9jzUFsQsc88";
+        String apikey = "YOUR_API_KEY";
         Places.initialize(getContext(), apikey);
         PlacesClient placesClient = Places.createClient(getContext());
 
