@@ -142,8 +142,8 @@ public class OngoingRideFragment extends Fragment implements View.OnClickListene
     private void EndRide() {
         db = FirebaseDatabase.getInstance().getReference().child("Ongoing");
         db3 = FirebaseDatabase.getInstance().getReference("Completed");
-        String sEmail = "getaridelk@gmail.com";
-        String sPass = "getarideassignment";
+        String sEmail = "COMPANY_EMAIL";
+        String sPass = "EMAIL_PASSWORD";
         String recipient = customerEmail;
         String endMileage = mileage.getText().toString();
         if(endMileage.isEmpty())

@@ -137,8 +137,8 @@ public class AssignRideFragment extends Fragment implements View.OnClickListener
     private void assignRide() {
         DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("PendingRides");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rides");
-        String sEmail = "getaridelk@gmail.com";
-        String sPass = "getarideassignment";
+        String sEmail = "COMPANY_EMAIL";
+        String sPass = "EMAIL_PASSWORD";
         String recipient = customerEmail;
         String status = "assigned";
         String logStart = "pending";
